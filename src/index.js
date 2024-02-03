@@ -12,7 +12,7 @@ dotenv.config({
 
 
 
-
+//2nd approach to connect DB
 connectDB()
 .then(()=>{
     app.on("error",(error)=>{
