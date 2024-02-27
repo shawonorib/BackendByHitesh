@@ -4,7 +4,9 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-const registerUser = asyncHandler(async (req, res) => {
+
+const registerUser = asyncHandler( async (req, res) => {
+  
   /* 
     1. first user ke ekta form dite hobe.
     2. form fill up korbe
@@ -22,32 +24,44 @@ const registerUser = asyncHandler(async (req, res) => {
    8. check for user creation
    9. return res
    */
-  const { fullName, email, username, password } = req.body;
-  console.log("email: ", email);
+
+  const { fullName, email, username, password } = req.body
+
+/*console.log("email: ", email); */
 
   /* 
-  //beginner রা এইভাবে code করে
+  //Beginners code like this
   if ((fullName = "")) {
     throw new ApiError(400, "fullName is required");
-  } */
+  } 
+  */
 
-  //advanc technic validation করারঃ
+  //advance technic validation করারঃ
   if (
     [fullName, email, username, password].some((field) => field?.trim() === "")
   ) {
     throw new ApiError(400, "All fields are required");
   }
 
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }],
-  });
+  })
 
   if (existedUser) {
-    throw new ApiError(409, "User with email or username already exists");
+    throw new ApiError(409, "User with email or username already exists")
   }
 
   const avatarLocalPath = req.files?.avatar[0]?.path;
+  
   const coverImageLocalPath = req.files?.coverImage[0]?.path;
+
+  /* 
+  let coverImageLocalPath   ;
+  if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+    coverImageLocalPath = req.files.coverImage[0].path
+  }
+  */
+
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is required");

@@ -20,14 +20,18 @@ connectDB()
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 
-//আমি এই জায়গায় ভুল করছি। এই খানে এইভাবে import করলে হবে না। app.js থেকে import করতে হবে।
-//import express from "express"
-//const app = express();
+//I am wrong here। Importing this way will not work here. Must be imported from app.js.
+
+import express from "express"
+const app = express();
 
 dotenv.config({
     path: './env'
 })
 
+*/
+
+/* 
 //2nd approach to connect DB
 connectDB()
 .then(()=>{
@@ -43,7 +47,7 @@ connectDB()
 .catch((err)=>{
     console.log("MONGO db connection failed!!!", err);
 })
-*/
+ */
 
 /* 
 //1ST APPROACH TO CONNECT DB
@@ -66,4 +70,5 @@ const app = express();
         console.error("ERROR: ", error)
         throw err
     }
-})() */
+})()
+*/
