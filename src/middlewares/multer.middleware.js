@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
     cb(null, "./public/temp")
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); //Shawon tomake ei change ta korte hobe.
+    cb(null, file.originalname) //Shawon: you have to change this one.
   },
 });
 
